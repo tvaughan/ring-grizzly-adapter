@@ -28,9 +28,9 @@
 (defn- deploy-server
   "Deploy a Grizzly HttpServer instance with a given HttpServlet instance."
   [server servlet]
-  (doto (WebappContext. servlet-name "/")
-    (.addServlet servlet-name servlet)
-    (.deploy server))
+  (let [ctx (WebappContext. servlet-name "/") reg (.addServlet ctx servlet-name servlet)]
+    (.addMapping reg "/*")
+    (.deploy ctx server))
   server)
 
 (defn run-grizzly
