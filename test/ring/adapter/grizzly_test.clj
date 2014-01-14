@@ -1,4 +1,4 @@
-(ns ring.adapter.test.grizzly
+(ns ring.adapter.grizzly-test
   (:use
    clojure.test)
   (:require
