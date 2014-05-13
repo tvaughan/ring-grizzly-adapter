@@ -1,22 +1,11 @@
 (ns ring.adapter.grizzly
-  (:require [ring.util.servlet :refer [build-request-map
-                                       update-servlet-response]])
+  (:require [ring.util.servlet :refer [servlet] :rename {servlet create-servlet}])
   (:import (javax.servlet.http HttpServlet)
            (org.glassfish.grizzly.http.server HttpServer
                                               NetworkListener)
            (org.glassfish.grizzly.servlet WebappContext)))
 
 (def servlet-name "grizzly")
-
-(defn- create-servlet
-  "Create a proxied HttpServlet implementation for a given Ring handler."
-  [handler]
-  (proxy [HttpServlet] []
-    (service [request response]
-      "Override the `service` method in HttpServlet."
-      (let [request-map (build-request-map request) response-map (handler request-map)]
-        (when response-map
-          (update-servlet-response response response-map))))))
 
 (defn- create-server
   "Create a Grizzly HttpServer instance."
