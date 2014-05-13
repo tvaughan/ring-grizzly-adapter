@@ -18,7 +18,7 @@
   "Deploy a Grizzly HttpServer instance with a given HttpServlet instance."
   [server servlet]
   (let [ctx (WebappContext. servlet-name "/") reg (.addServlet ctx servlet-name servlet)]
-    (.addMapping reg "/*")
+    (.addMapping reg (into-array ["/*"]))
     (.deploy ctx server))
   server)
 
