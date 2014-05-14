@@ -1,7 +1,7 @@
 (ns ring.adapter.grizzly
-  (:require [ring.util.servlet :refer [servlet] :rename {servlet create-servlet}])
-  (:import (javax.servlet.http HttpServlet)
-           (org.glassfish.grizzly.http.server HttpServer
+  (:require [ring.util.servlet :refer [servlet]
+             :rename {servlet create-servlet}])
+  (:import (org.glassfish.grizzly.http.server HttpServer
                                               NetworkListener)
            (org.glassfish.grizzly.servlet WebappContext)))
 

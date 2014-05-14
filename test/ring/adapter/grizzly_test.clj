@@ -1,16 +1,17 @@
 (ns ring.adapter.grizzly-test
-  (:use
-   clojure.test)
-  (:require
-   [clj-http.client :as http]
-   [ring.adapter.grizzly :refer [run-grizzly]]))
+  (:require [clj-http.client :as http]
+            [clojure.test :refer :all]
+            [ring.adapter.grizzly :refer [run-grizzly]]))
 
-(defn- hello-world [request]
+(defn- hello-world
+  [request]
   {:status 200
    :headers {"Content-Type" "text/plain"}
    :body "Hello, World!"})
 
-(defmacro with-server [app options & body]
+(defmacro with-server
+  {:requires [run-grizzly]}
+  [app options & body]
   `(let [server# (run-grizzly ~app ~(assoc options :join? false))]
      (try
        ~@body
