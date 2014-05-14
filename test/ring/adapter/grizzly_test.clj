@@ -21,5 +21,5 @@
     (with-server hello-world {:port 7337}
       (let [response (http/get "http://localhost:7337")]
         (is (= (:status response) 200))
-        (is (.startsWith (get-in response [:headers "content-type"]) "text/plain"))
+        (is (.startsWith (get-in response [:headers :content-type]) "text/plain"))
         (is (= (:body response) "Hello, World!"))))))
